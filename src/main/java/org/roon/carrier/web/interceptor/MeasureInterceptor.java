@@ -13,6 +13,7 @@ public class MeasureInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         request.setAttribute("startTime", System.currentTimeMillis());
 
+        //인터셉터가 요청을 응답하지 않고 처리를 다음 단계로 계속 진행하려면 true를 리턴해야 함.
         return true;
         //return false;
     }
@@ -23,6 +24,9 @@ public class MeasureInterceptor implements HandlerInterceptor {
         request.removeAttribute("startTime");
 
         log.info("handling time = " + handlingTime);
-        modelAndView.addObject("handlingTime", handlingTime);
+
+        if (modelAndView != null) {
+            modelAndView.addObject("handlingTime", handlingTime);
+        }
     }
 }
