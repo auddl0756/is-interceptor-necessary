@@ -1,7 +1,7 @@
 package org.roon.carrier.web.interceptor;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.catalina.webresources.war.Handler;
+import org.springframework.ui.Model;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @Log4j2
 public class LogInterceptor implements HandlerInterceptor {
@@ -20,8 +22,10 @@ public class LogInterceptor implements HandlerInterceptor {
 
         log.info("auth type? : " + request.getAuthType());
 
-        Cookie cookie = request.getCookies()[0];
-        log.info("cookie info : " + cookie.getName() + " " + cookie.getDomain() + " " + cookie.getValue() + " " + cookie.getMaxAge());
+        if(request.getCookies() != null){
+            Cookie cookie = request.getCookies()[0];
+            log.info("cookie info : " + cookie.getName() + " " + cookie.getDomain() + " " + cookie.getValue() + " " + cookie.getMaxAge());
+        }
 
         log.info("servlet mapping ? : " + request.getHttpServletMapping());
 
@@ -38,6 +42,14 @@ public class LogInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         log.info("이 메소드가 처리했음 : " + handlerMethod.getShortLogMessage());
+
+        if(modelAndView != null){
+            Map<String,Object> modelAttributes = modelAndView.getModel();
+            modelAttributes.put("returnTime",LocalDateTime.now());
+
+//            log.info(modelAndView.getModelMap());
+//            modelAndView.getModelMap().addAttribute("returnTime",LocalDateTime.now());
+        }
     }
 
     @Override

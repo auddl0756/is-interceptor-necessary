@@ -10,7 +10,7 @@ import java.util.List;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    private static final List<String> URL_PATTERNS = Arrays.asList("/sample");
+    private static final List<String> URL_PATTERNS = Arrays.asList("/sample","/sample/**");
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
