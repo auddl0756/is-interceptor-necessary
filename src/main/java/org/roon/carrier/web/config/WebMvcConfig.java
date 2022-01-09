@@ -1,4 +1,4 @@
-package org.roon.carrier.web;
+package org.roon.carrier.web.config;
 
 import org.roon.carrier.web.interceptor.LogInterceptor;
 import org.roon.carrier.web.interceptor.MeasureInterceptor;

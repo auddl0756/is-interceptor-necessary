@@ -22,11 +22,6 @@ public class LogInterceptor implements HandlerInterceptor {
 
         log.info("auth type? : " + request.getAuthType());
 
-        if(request.getCookies() != null){
-            Cookie cookie = request.getCookies()[0];
-            log.info("cookie info : " + cookie.getName() + " " + cookie.getDomain() + " " + cookie.getValue() + " " + cookie.getMaxAge());
-        }
-
         log.info("servlet mapping ? : " + request.getHttpServletMapping());
 
         // return
