@@ -23,14 +23,10 @@ public class SampleController {
     }
 
     @GetMapping("/list")
-    public ModelAndView list(ModelAndView modelAndView){
+    public ModelAndView list(ModelAndView modelAndView) {
         modelAndView.setViewName("sample/list");
-        modelAndView.addObject("list",Arrays.asList(1,2,3,4,5));
+        modelAndView.addObject("list", Arrays.asList(1, 2, 3, 4, 5));
 
         return modelAndView;
-
-        //model.addAttribute("list", Arrays.asList(1,2,3,4,5));
-        //return "sample/list";
     }
-
 }

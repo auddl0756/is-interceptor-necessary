@@ -17,8 +17,8 @@ public class LogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 적용 시점
-        // handler mapping이 어떤 hanlder를 통해 요청을 처리할 지 결정한 후
-        // 하지만 hanlder adapter가 요청을 실제로 처리하기는 전
+            // handler mapping이 어떤 hanlder를 통해 요청을 처리할 지 결정한 후
+            // 하지만 hanlder adapter가 요청을 실제로 처리하기는 전
 
         log.info("auth type? : " + request.getAuthType());
 
@@ -30,11 +30,11 @@ public class LogInterceptor implements HandlerInterceptor {
         log.info("servlet mapping ? : " + request.getHttpServletMapping());
 
         // return
-        // true -> 실행 체인의 다음 인터셉터로 진행
-        // false -> 이 인터셉터에서 응답을 처리했다고 dispatcher servlet에게 알림
-        //          http error를 리턴하거나, custom response를 쓴다.(printWriter였던가?)
+            // true -> 실행 체인의 다음 인터셉터로 진행
+            // false -> 이 인터셉터에서 응답을 처리했다고 dispatcher servlet에게 알림
+            //          http error를 리턴하거나, custom response를 쓴다.(printWriter였던가?)
 
-//        return false;
+        //return false;
         return true;
     }
 
@@ -46,14 +46,6 @@ public class LogInterceptor implements HandlerInterceptor {
         if(modelAndView != null){
             Map<String,Object> modelAttributes = modelAndView.getModel();
             modelAttributes.put("returnTime",LocalDateTime.now());
-
-//            log.info(modelAndView.getModelMap());
-//            modelAndView.getModelMap().addAttribute("returnTime",LocalDateTime.now());
         }
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
     }
 }
